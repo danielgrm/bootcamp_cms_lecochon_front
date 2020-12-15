@@ -34,7 +34,7 @@ return (
     <Products>
             {isCreate 
             ? <ProdForm update={update}  /> 
-            : <List update = {updateProduct} />}
+            : <List updateProduct = {updateProduct} />}
     </Products>
     </>
 )

@@ -23,22 +23,22 @@ onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
 className="justify-content-end" variant="tabs"  defaultActiveKey="/">
 
 
-            <NavLink exact={true} to=''>
+            <NavLink exact={true} to='/'>
                 <Nav.Link as="div">{"Accueil"}</Nav.Link>
             </NavLink>
-            <NavLink exact={true} to='bio'>
+            <NavLink exact={true} to='/bio'>
                 <Nav.Link as="div">{"Bio"}</Nav.Link>
             </NavLink>
-            <NavLink exact={true} to='menu'>
+            <NavLink exact={true} to='/menu'>
                 <Nav.Link as="div">{"Menu"}</Nav.Link>
             </NavLink>
-            <NavLink exact={true} to='produits'>
+            <NavLink exact={true} to='/produits'>
                 <Nav.Link as="div">{"Produits"}</Nav.Link>
             </NavLink>
-            <NavLink exact={true} to='services'>
+            <NavLink exact={true} to='/services'>
                 <Nav.Link as="div">{"Services"}</Nav.Link>
             </NavLink>
-            <NavLink exact={true} to='contact'>
+            <NavLink exact={true} to='/contact'>
                 <Nav.Link as="div">{"Contact"}</Nav.Link>
             </NavLink>
    </Nav>

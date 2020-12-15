@@ -19,7 +19,7 @@ export default (props) => {
             <Route exact basename={props.match.path} path={props.match.path + 'produits'} component={Produits} />
             <Route exact basename={props.match.path} path={props.match.path + 'services'} component={Services} />
             <Route exact basename={props.match.path} path={props.match.path + 'menu'} component={Menu} />
-            <Route exact basename={props.match.path} path={props.match.path + 'contato'} component={Contact} />
+            <Route exact basename={props.match.path} path={props.match.path + 'contact'} component={Contact} />
         </Layout>
     )
 }

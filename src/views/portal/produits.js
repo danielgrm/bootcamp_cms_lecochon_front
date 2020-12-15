@@ -1,62 +1,47 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { CardDeck, Card } from 'react-bootstrap'
+import { CardColumns, Card } from 'react-bootstrap'
 import { getCategories, getProducts } from '../../services/admin'
+import { MdFilter } from 'react-icons/md'
 
 export default () => {
  //   const [categories, setCategories] = useState([])
-    const [products, setProducts] = useState([])
-    const getprod = async () => {
-        await getProducts()
-        setProducts (getprod.data)
-    }
     
+ const [ativos, setativos] = useState([])
+ 
+ const getprod = async () => {
+  const  { data } = await getProducts()
+  setativos(data.filter(element => {
+          return element.status==true
+  }))
+}
+getprod()
+
+
     return(
     <Produits>
-        Achetez les produits utilizé par le Chef Remi!
-            
+      <Card>
+      <Card.Header>Ramportez chez vous les produits serví par le Chef Remi!</Card.Header>
+      </Card>
+
+          
     
-        <CardDeck>
-  <Card>
-    <Card.Img variant="top" src="holder.js/100px160" />
-    <Card.Body>
-      <Card.Title>Card title</Card.Title>
+        <CardColumns>
+  
+        {ativos.map((element, i) => (<Card>
+          <Card.Img variant="top" src={element.photo} />
+          <Card.Body>
+      <Card.Title>{element.title}</Card.Title>
       <Card.Text>
-        This is a wider card with supporting text below as a natural lead-in to
-        additional content. This content is a little bit longer.
+        {element.description}
       </Card.Text>
     </Card.Body>
     <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
+      <small className="text-muted">${element.price}</small>
     </Card.Footer>
-  </Card>
-  <Card>
-    <Card.Img variant="top" src="holder.js/100px160" />
-    <Card.Body>
-      <Card.Title>Card title</Card.Title>
-      <Card.Text>
-        This is a wider card with supporting text below as a natural lead-in to
-        additional content. This content is a little bit longer.
-      </Card.Text>
-    </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
-  </Card>
-  <Card>
-    <Card.Img variant="top" src="holder.js/100px160" />
-    <Card.Body>
-      <Card.Title>Card title</Card.Title>
-      <Card.Text>
-        This is a wider card with supporting text below as a natural lead-in to
-        additional content. This content is a little bit longer.
-      </Card.Text>
-    </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
-  </Card>
-  </CardDeck>
+  </Card>))}
+
+  </CardColumns>
             </Produits>    
         )
     }

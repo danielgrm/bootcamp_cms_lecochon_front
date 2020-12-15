@@ -124,7 +124,7 @@ const ProdForm = (props) => {
         const value = attr.target.value;
         attr.preventDefault();
         console.log("value", value)
-        const percent = value / formProduct.price * 100;
+        const percent = (formProduct.price - value) / formProduct.price * 100;
         const percentAllow = percent >= 100 ? 100 : percent
         setformProduct({
             ...formProduct,
@@ -198,7 +198,7 @@ const ProdForm = (props) => {
             <Form.Check
                 type="switch"
                 id="highlight"
-                label="É Highlight?"
+                label="Mostra no banner da home?"
                 onChange={handleChange}
                 value={formProduct.highlight}
                 name="highlight"

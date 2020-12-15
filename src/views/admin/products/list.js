@@ -61,7 +61,7 @@ const List = (props) => {
                         <tr key={i}>
                             <td>{obj.title}</td>
                             <td>{obj.category.name}</td>
-                            <td> <ActionButton onClick={() => props.update(obj)} variant="warning" size="sm">Editar</ActionButton>
+                            <td> <ActionButton onClick={() => props.updateProduct(obj)} variant="warning" size="sm">Editar</ActionButton>
                             | 
                             <ActionButton onClick={() => _deleteProduct(obj)} variant="danger" size="sm">Excluir</ActionButton></td>
                         </tr>
