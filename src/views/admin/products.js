@@ -7,37 +7,43 @@ import { useLocation } from 'react-router-dom'
 
 export default () => {
 
-const [isCreate, setCreate] = useState(false)
-const [update, setUpdate] = useState({})
-const location = useLocation()
-console.log(location)
+    const [isCreate, setCreate] = useState(true)
+    const [update, setUpdate] = useState({})
+    const location = useLocation()
+    console.log(location)
 
-const updateProduct = (obj) => {
-    setUpdate(obj)
-    setCreate(true)
-}
-
-useEffect(() => {
-if (location.state?.update) {
-    setCreate(false)
+    const newProduct = () => { 
+        setUpdate(false) 
+        setCreate(!isCreate) 
     }
-}, [location])
 
 
-return (
-    <>
-    <Button size="sm" onClick={() => setCreate(!isCreate)}>
-            {isCreate ? "Lista" : "Novo"}
+    const updateProduct = (obj) => {
+        setUpdate(obj)
+        setCreate(true)
+    }
+
+    useEffect(() => {
+        if (location.state?.update) {
+            setCreate(false)
+        }
+    }, [location])
+
+
+    return (
+        <>
+            <Button size="sm" onClick={() => newProduct()}>
+                {isCreate ? "Lista" : "Novo"}
             </Button>
-    <hr />
+            <hr />
 
-    <Products>
-            {isCreate 
-            ? <ProdForm update={update}  /> 
-            : <List updateProduct = {updateProduct} />}
-    </Products>
-    </>
-)
+            <Products>
+                {isCreate
+                    ? <ProdForm update={update} />
+                    : <List updateProduct={updateProduct} />}
+            </Products>
+        </>
+    )
 }
 
 const Products = styled.div`
@@ -171,7 +177,7 @@ const Products = styled.div`
     // }
 
 
- 
+
 
 
 // const THeadItem = styled.th`

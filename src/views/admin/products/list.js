@@ -30,7 +30,7 @@ const List = (props) => {
         })
 
         Swal.fire({
-            title: `Deseja exluir ${obj.title} `,
+            title: `Deseja excluir ${obj.title} `,
             showCancelButton: true,
             confirmButtonText: `Sim`,
             cancelButtonText: `Não`,

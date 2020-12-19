@@ -12,9 +12,15 @@ export default (props) => {
     return(
 <Header>
     
+{/* 
+<div style={{display: 'flex', justifyContent: 'right'}} >
+            <div className="row" > */}
 
 <Navbar bg="light">
+    <div className="row">
 <h1><MdRestaurant/><GiPig/><Navbar.Brand className="bienvenu" href="/">Bienvenu au Bistro Le Chochon Gourmand</Navbar.Brand><GiPig/><MdRestaurant/></h1>
+</div>
+<div className="row" style={{justifyContent: 'right'}} >
 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
 <Navbar.Collapse classname="justify-content-end" />
 <Nav 
@@ -42,9 +48,10 @@ className="justify-content-end" variant="tabs"  defaultActiveKey="/">
                 <Nav.Link as="div">{"Contact"}</Nav.Link>
             </NavLink>
    </Nav>
-
+   </div>
 </Navbar>
-<div className="roi"><h2>Bistro et Charcurterie Gastronomique. Ici le Porc est le Roi! </h2></div>
+
+<div className="roi" style={{display: 'flex', justifyContent: 'center'}} ><h2>Bistro et Charcurterie Gastronomique. Ici le Porc est le Roi! </h2></div>
 </Header>
 
 )

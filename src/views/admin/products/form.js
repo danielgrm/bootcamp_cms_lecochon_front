@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { createProduct } from '../../../services/admin'
+import { createProduct, getCategories, updateProduct } from '../../../services/admin'
 import { Button, Form } from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import styled from 'styled-components'
 import Swal from 'sweetalert2'
-import { getCategories } from '../../../services/admin'
-
 
 const ProdForm = (props) => {
 
@@ -14,25 +12,17 @@ const ProdForm = (props) => {
         status: true,
         highlight: false, 
         ...props.update,
-        category: props.update?.category?._id || undefined
+           category: props.update?.category?._id || undefined
     })
 
-    //     status: true,
-    //     highlight: false
-    // })
-    const [isUpdate, setIsUpdate] = useState(false)
+
+//    const [isUpdate, setIsUpdate] = useState(false)
     const [categories, setCategories] = useState([])
     const [progress, setProgress] = useState(0)
     const [updatePhoto, setUpdatePhoto] = useState(false)
 
-    useEffect(() => {
-        let get = async () => { const c = await getCategories(); setCategories(c.data); }
-        get();
-        //clear
-        return () => get = () => { };
-    }, [])
-
-
+    const decidemetodo = (data) => isUpdate? updateProduct(props.update._id, data) : createProduct (data)
+    const isUpdate = Object.keys(props.update).length > 0 
 
     const handleChange = (attr) => {
         const { value, name, checked } = attr.target
@@ -53,11 +43,7 @@ const ProdForm = (props) => {
         return;
     }
 
-
     const submete = async () => {
-
-
-
         const message = (type, message) => Swal.fire({
             position: 'top-end',
             icon: type || 'success',
@@ -68,10 +54,11 @@ const ProdForm = (props) => {
         // conversao dos dados paa formData
         let data = new FormData()
 
-
         Object.keys(formProduct)
             .forEach(key => data.append(key, formProduct[key]))
-
+            // if (typeof formProduct.photo === "string"){
+            //     data.delete('photo')
+            // }
         const config = {
             onUploadProgress: function (progressEvent) {
                let successPercent = Math.round(progressEvent.loaded * 100 / progressEvent.total)
@@ -81,12 +68,14 @@ const ProdForm = (props) => {
             headers: {
                 'Content-type': 'multipart/form-data'
             }
+          
         }
     
 
-        createProduct(data, config)
+        console.log(formProduct)
+        decidemetodo(data, config)
             .then((res) => {
-                //                clearForm()
+                                clearForm()
                 message('success', `Produto Cadastrado`)
             })
             .catch((err) => message('error', `Deu Merda.`))
@@ -98,6 +87,16 @@ const ProdForm = (props) => {
         //     status: true,
         //     highlight: false
         // })
+
+        const clearForm = () => {
+            setUpdatePhoto(true)
+            setformProduct({
+                category: "",
+                status: true,
+                highlight: false,
+                photo: ""
+            })
+        }
 
     }
     const isNotValid = () => {
@@ -145,8 +144,12 @@ const ProdForm = (props) => {
 
     };
 
-
-
+    useEffect(() => {
+        let get = async () => { const c = await getCategories(); setCategories(c.data); }
+        get();
+        //clear
+        return () => get = () => { };
+    }, [])
 
     return (
         <>
@@ -169,8 +172,8 @@ const ProdForm = (props) => {
 
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>Categoria</Form.Label>
-                <Form.Control as="select" name="category" onChange={handleChange}>
-                    <option value="">tem que escolher uma</option>
+                <Form.Control as="select" name="category" onChange={handleChange} value={formProduct.category || <option>Tem que escolher</option>}>
+
                     {categories.map((it, i) => (
                         <option key={i} value={it._id}>{it.name}</option>
                     ))}
@@ -228,6 +231,16 @@ const ProdForm = (props) => {
 
 }
 export default ProdForm
+const Picpreview = styled.div`
+
+    display: flex;
+    flex-direction: column;
+
+    img{
+        max-width: 200px;
+        max-height: 200px;
+    }
+    `
 
 const Picture = styled.div`
 
