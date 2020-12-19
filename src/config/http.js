@@ -6,7 +6,7 @@ const UrlApi = `https://immense-oasis-94300.herokuapp.com/`
 
 
 const http = axios.create({
-    baseURL: process.env.REACT_APP_API || UrlApi
+    baseURL: UrlApi
 })
 
 http.defaults.headers['Content-type'] = 'application/json'
