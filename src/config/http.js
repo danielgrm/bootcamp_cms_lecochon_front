@@ -5,7 +5,7 @@ import history from './history'
 const localUrlApi = `http://localhost:3002`
 
 const http = axios.create({
-    baseURL: process.env.REACT_APP_API || localUrlApi
+    baseURL: https://immense-oasis-94300.herokuapp.com/ || localUrlApi
 })
 
 http.defaults.headers['Content-type'] = 'application/json'
