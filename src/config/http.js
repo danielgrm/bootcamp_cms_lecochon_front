@@ -2,10 +2,11 @@ import axios from 'axios'
 import { getToken, removeToken } from './auth';
 import history from './history'
 
-const localUrlApi = `http://localhost:3002`
+const UrlApi = `https://immense-oasis-94300.herokuapp.com/`
+
 
 const http = axios.create({
-    baseURL: https://immense-oasis-94300.herokuapp.com/ || localUrlApi
+    baseURL: process.env.REACT_APP_API || UrlApi
 })
 
 http.defaults.headers['Content-type'] = 'application/json'
